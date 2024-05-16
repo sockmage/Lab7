@@ -23,8 +23,10 @@ fun Note() {
                 .size(40.dp)
                 .background(rwGreen)
         )
-        Text(text = "Заголовок", maxLines = 1)
-        Text(text = "Содержимое", maxLines = 1)
+        Column(modifier = Modifier.weight(1f)) {
+            Text(text = "Заголовок", maxLines = 1)
+            Text(text = "Содержимое", maxLines = 1)
+        }
         Checkbox(
             checked = false, onCheckedChange = { },
             modifier = Modifier.padding(start = 8.dp)
