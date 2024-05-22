@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
 
     setContent {
       NotesTheme {
-        NotesScreen(viewModel = viewModel)
+        MainActivityScreen(viewModel = viewModel)
       }
     }
   }
