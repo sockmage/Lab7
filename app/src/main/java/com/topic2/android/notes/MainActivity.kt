@@ -34,11 +34,9 @@ class MainActivity : AppCompatActivity() {
       (application as NotesApplication).dependencyInjector.repository
     )
   })
-
   @ExperimentalMaterialApi
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-
     setContent {
       NotesTheme {
         MainActivityScreen(viewModel = viewModel)
@@ -46,7 +44,6 @@ class MainActivity : AppCompatActivity() {
     }
   }
 }
-
 
 @Composable
 @ExperimentalMaterialApi

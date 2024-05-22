@@ -69,7 +69,6 @@ fun SaveNoteScreen(viewModel: MainViewModel) {
     val moveNoteToTrashDialogShownState: MutableState<Boolean> = rememberSaveable {
         mutableStateOf(false)
     }
-
     BackHandler (
         onBack = {
             if (bottomDrawerState.isOpen) {
@@ -79,7 +78,6 @@ fun SaveNoteScreen(viewModel: MainViewModel) {
             }
         }
     )
-
     Scaffold(topBar = {
         val isEditingMode: Boolean = noteEntry.id != NEW_NOTE_ID
         SaveNoteTopAppBar(
@@ -118,37 +116,37 @@ fun SaveNoteScreen(viewModel: MainViewModel) {
                     )
                 }
             )
-        if (moveNoteToTrashDialogShownState.value) {
-            AlertDialog(
-                onDismissRequest = {
-                    moveNoteToTrashDialogShownState.value = false
-                },
-                title = {
-                    Text("Move note to the trash?")
-                },
-                text = {
-                    Text(
-                        "Are you sure you want to" + "move this note to the trash?"
-                    )
-                },
-                confirmButton = {
-                    TextButton(onClick = {
-                        viewModel.moveNoteToTrash(noteEntry)
-                    }) {
-                        Text("Confirm")
-                    }
-                },
-                dismissButton = {
-                    TextButton(onClick = {
-                        moveNoteToTrashDialogShownState.value = false
-                    }) {
-                        Text("Dismiss")
-                    }
-                }
-            )
-            }
         }
     )
+    if (moveNoteToTrashDialogShownState.value) {
+        AlertDialog(
+            onDismissRequest = {
+                moveNoteToTrashDialogShownState.value = false
+            },
+            title = {
+                Text("Move note to the trash?")
+            },
+            text = {
+                Text(
+                    "Are you sure you want to" + "move this note to the trash?"
+                )
+            },
+            confirmButton = {
+                TextButton(onClick = {
+                    viewModel.moveNoteToTrash(noteEntry)
+                }) {
+                    Text("Confirm")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = {
+                    moveNoteToTrashDialogShownState.value = false
+                }) {
+                    Text("Dismiss")
+                }
+            }
+        )
+    }
 }
 
 
@@ -208,8 +206,6 @@ private fun SaveNoteTopAppBar(
         }
     )
 }
-
-
 @Composable
 private fun SaveNoteContent(
     note: NoteModel,
@@ -244,9 +240,8 @@ private fun SaveNoteContent(
         )
         PickedColor(color = note.color)
     }
+
 }
-
-
 @Composable
 private fun ContentTextField(
     modifier: Modifier = Modifier,
@@ -266,8 +261,6 @@ private fun ContentTextField(
         )
     )
 }
-
-
 @Composable
 private fun NoteCheckOption(
     isChecked: Boolean,
@@ -288,7 +281,6 @@ private fun NoteCheckOption(
     }
 }
 
-
 @Composable
 private fun PickedColor(color: ColorModel) {
     Row (
@@ -308,7 +300,6 @@ private fun PickedColor(color: ColorModel) {
         )
     }
 }
-
 
 @Composable
 private fun ColorPicker(
@@ -340,7 +331,6 @@ private fun ColorPicker(
         }
     }
 }
-
 @Composable
 fun ColorItem(
     color: ColorModel,
@@ -376,20 +366,6 @@ fun ColorItemPreview() {
     ColorItem(ColorModel.DEFAULT) {}
 }
 
-
-@Preview
-@Composable
-fun SaveNoteTopAppBarPreview() {
-    SaveNoteTopAppBar(
-        isEditingMode = true,
-        onBackClick = {},
-        onSaveNoteClick = {},
-        onOpenColorPickerClick = {},
-        onDeleteNoteClick = {}
-    )
-}
-
-
 @Preview
 @Composable
 fun ColorPickerPreview() {
@@ -402,7 +378,17 @@ fun ColorPickerPreview() {
     ) { }
 }
 
-
+@Preview
+@Composable
+fun SaveNoteTopAppBarPreview() {
+    SaveNoteTopAppBar(
+        isEditingMode = true,
+        onBackClick = {},
+        onSaveNoteClick = {},
+        onOpenColorPickerClick = {},
+        onDeleteNoteClick = {}
+    )
+}
 @Preview
 @Composable
 fun SaveNoteContentPreview() {
@@ -411,8 +397,6 @@ fun SaveNoteContentPreview() {
         onNoteChange = {}
     )
 }
-
-
 @Preview
 @Composable
 fun ContentTextFieldPreview() {
@@ -422,15 +406,11 @@ fun ContentTextFieldPreview() {
         onTextChange = {}
     )
 }
-
-
 @Preview
 @Composable
 fun NoteCheckOptionPreview() {
     NoteCheckOption(false) {}
 }
-
-
 @Preview
 @Composable
 fun PickedColorPreview() {
