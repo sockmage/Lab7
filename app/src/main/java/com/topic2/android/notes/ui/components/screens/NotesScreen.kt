@@ -5,9 +5,11 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.FabPosition
 import androidx.compose.material.FloatingActionButton
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.ScaffoldState
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.List
@@ -36,17 +38,31 @@ fun NotesScreen(viewModel: MainViewModel) {
     val coroutineScope = rememberCoroutineScope()
     val scaffoldState: ScaffoldState = rememberScaffoldState()
 
-    Scaffold(topBar = {
-        TopAppBar(
-            title = "Notes",
-            icon = Icons.Filled.List,
-            onIconClick = {
-                coroutineScope.launch {
-                    scaffoldState.drawerState.open()
+    Scaffold(
+        topBar = {
+            androidx.compose.material.TopAppBar(
+                title = {
+                    Text(
+                        text = "Notes",
+                        color = MaterialTheme.colors.onPrimary
+                    )
+                },
+                navigationIcon = {
+                    IconButton(
+                        onClick = {
+                            coroutineScope.launch {
+                                scaffoldState.drawerState.open()
+                            }
+                        }
+                    ) {
+                        Icon(
+                            imageVector = Icons.Filled.List,
+                            contentDescription = "Drawer Button"
+                        )
+                    }
                 }
-            }
-        )
-    },
+            )
+        },
         scaffoldState = scaffoldState,
         drawerContent = {
             AppDrawer(
