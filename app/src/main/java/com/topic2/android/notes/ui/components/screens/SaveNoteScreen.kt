@@ -1,5 +1,7 @@
 package com.topic2.android.notes.ui.components.screens
 
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
@@ -14,13 +16,20 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.topic2.android.notes.R
+import com.topic2.android.notes.domain.model.ColorModel
 import com.topic2.android.notes.domain.model.NEW_NOTE_ID
 import com.topic2.android.notes.domain.model.NoteModel
 import com.topic2.android.notes.routing.NotesRouter
 import com.topic2.android.notes.routing.Screen
+import com.topic2.android.notes.ui.components.NoteColor
+import com.topic2.android.notes.util.fromHex
 import com.topic2.android.notes.viewmodel.MainViewModel
 import kotlinx.coroutines.launch
 
@@ -101,6 +110,27 @@ private fun SaveNoteTopAppBar(
 }
 
 
+@Composable
+private fun PickedColor(color: ColorModel) {
+    Row (
+        Modifier
+            .padding(8.dp)
+            .padding(top = 16.dp)
+    ) {
+        Text(
+            text = "Picked color", modifier = Modifier
+                .weight(1f)
+                .align(Alignment.CenterVertically)
+        )
+        NoteColor(
+            color = Color.fromHex(color.hex), size = 40.dp,
+            border = 1.dp,
+            modifier = Modifier.padding(4.dp)
+        )
+    }
+}
+
+
 @Preview
 @Composable
 fun SaveNoteTopAppBarPreview() {
@@ -111,4 +141,11 @@ fun SaveNoteTopAppBarPreview() {
         onOpenColorPickerClick = {},
         onDeleteNoteClick = {}
     )
+}
+
+
+@Preview
+@Composable
+fun PickedColorPreview() {
+    PickedColor(ColorModel.DEFAULT)
 }
